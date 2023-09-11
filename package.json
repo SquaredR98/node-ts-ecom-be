@@ -1,0 +1,64 @@
+{
+  "name": "ts-ecom-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./build/index",
+    "dev": "nodemon -r tsconfig-paths/register src/index.ts | ./node_modules/.bin/bunyan",
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
+    "lint:check": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "prettier:check": "prettier --check 'src/**/*.{ts,json}'",
+    "prettier:fix": "prettier --write 'src/**/*.{ts,json}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SquaredR98/node-ts-ecom-be.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "mongoose",
+    "javascript",
+    "typescript",
+    "express"
+  ],
+  "author": "Ravi Ranjan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SquaredR98/node-ts-ecom-be/issues"
+  },
+  "homepage": "https://github.com/SquaredR98/node-ts-ecom-be#readme",
+  "dependencies": {
+    "@typescript-eslint/parser": "^6.6.0",
+    "bunyan": "^1.8.15",
+    "compression": "^1.7.4",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "eslint-config-prettier": "^9.0.0",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^7.0.0",
+    "hpp": "^0.2.3",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^7.5.0",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.7",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.2.2",
+    "typescript-transform-paths": "^3.4.6"
+  },
+  "devDependencies": {
+    "@types/bunyan": "^1.8.8",
+    "@types/compression": "^1.7.3",
+    "@types/cookie-session": "^2.0.45",
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.17",
+    "@types/hpp": "^0.2.2",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3"
+  }
+}
