@@ -32,6 +32,7 @@
   "homepage": "https://github.com/SquaredR98/node-ts-ecom-be#readme",
   "dependencies": {
     "@typescript-eslint/parser": "^6.6.0",
+    "bcryptjs": "^2.4.3",
     "bunyan": "^1.8.15",
     "compression": "^1.7.4",
     "cookie-session": "^2.0.0",
@@ -43,6 +44,9 @@
     "helmet": "^7.0.0",
     "hpp": "^0.2.3",
     "http-status-codes": "^2.2.0",
+    "joi": "^17.10.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.0.0",
     "mongoose": "^7.5.0",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.7",
@@ -51,12 +55,14 @@
     "typescript-transform-paths": "^3.4.6"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.3",
     "@types/bunyan": "^1.8.8",
     "@types/compression": "^1.7.3",
     "@types/cookie-session": "^2.0.45",
     "@types/cors": "^2.8.14",
     "@types/express": "^4.17.17",
     "@types/hpp": "^0.2.2",
+    "@types/jsonwebtoken": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3"

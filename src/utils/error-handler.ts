@@ -1,4 +1,8 @@
+import Logger from 'bunyan';
 import HTTP_STATUS from 'http-status-codes';
+import { config } from '../config';
+
+const logger: Logger = config.createLogger('CUSTOM-ERROR');
 
 export interface IErrorResponse {
   message: string;

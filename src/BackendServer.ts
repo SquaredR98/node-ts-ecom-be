@@ -1,14 +1,16 @@
 import hpp from 'hpp';
 import cors from 'cors';
 import helmet from 'helmet';
-import { config } from './config';
+import Logger from 'bunyan';
 import compression from 'compression';
 import HTTP_STATUSES from 'http-status-codes';
 import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
 import cookieSession from 'cookie-session';
 import { Server as HttpServer } from 'http';
+import { config } from './config';
+import applicationRoutes from './routes';
 import { CustomError, IErrorResponse } from './utils/error-handler';
-import Logger from 'bunyan';
+import { requestInterceptor } from './utils/middlewares/RequestInterceptor';
 
 const SERVER_PORT = 5000;
 const logger: Logger = config.createLogger('BACKEND-SERVER');
@@ -21,8 +23,8 @@ export class BackendServer {
   }
 
   public startBackendServer(): void {
-    this.standardMiddleware(this.app);
     this.securityMiddleware(this.app);
+    this.standardMiddleware(this.app);
     this.routesMiddleware(this.app);
     this.globalErrorHandler(this.app);
     this.startServer(this.app);
@@ -55,15 +57,16 @@ export class BackendServer {
     app.use(urlencoded({ extended: true, limit: '50mb' }));
   }
   private routesMiddleware(app: Application): void {
-    app;
+    applicationRoutes(app);
   }
+
   private globalErrorHandler(app: Application): void {
     app.all('*', (req: Request, res: Response) => {
       res.status(HTTP_STATUSES.NOT_FOUND).json({
-        message: `${req.originalUrl} not found.`
+        message: `Route: ${req.originalUrl} not found.`
       });
     });
-
+    
     app.use((error: IErrorResponse, req: Request, res: Response, next: NextFunction) => {
       logger.error(error);
       if (error instanceof CustomError) {
@@ -72,6 +75,7 @@ export class BackendServer {
       next();
     });
   }
+
   private startServer(app: Application): void {
     try {
       const httpServer: HttpServer = new HttpServer(app);
@@ -80,6 +84,7 @@ export class BackendServer {
       console.log(error);
     }
   }
+
   private startHttpServer(httpServer: HttpServer): void {
     logger.info(`Server has started with process id ${process.pid}`);
     httpServer.listen(SERVER_PORT, () => {

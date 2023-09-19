@@ -105,6 +105,14 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "pretty": true
+    "pretty": true,
+    "paths": {
+      "@auth-db/*": ["src/database/auth/*"],
+      "@user-profile-db/*": ["src/database/user-profile/*"],
+      "@auth-feature/*": ["src/features/auth/*"],
+      "@user-profile-feature/*": ["src/features/user-profile/*"],
+      "@utils/*": ["src/utils/*"],
+      "@root/*": ["src/*"]
+    }
   }
 }
