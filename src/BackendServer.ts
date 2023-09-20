@@ -2,15 +2,16 @@ import hpp from 'hpp';
 import cors from 'cors';
 import helmet from 'helmet';
 import Logger from 'bunyan';
+import 'express-async-errors';
 import compression from 'compression';
-import HTTP_STATUSES from 'http-status-codes';
-import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
 import cookieSession from 'cookie-session';
 import { Server as HttpServer } from 'http';
-import { config } from './config';
-import applicationRoutes from './routes';
-import { CustomError, IErrorResponse } from './utils/error-handler';
-import { requestInterceptor } from './utils/middlewares/RequestInterceptor';
+import HTTP_STATUSES from 'http-status-codes';
+import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
+
+import { config } from '@root/config';
+import applicationRoutes from '@root/routes';
+import { CustomError, IErrorResponse } from '@utils/error-handler';
 
 const SERVER_PORT = 5000;
 const logger: Logger = config.createLogger('BACKEND-SERVER');
@@ -66,7 +67,7 @@ export class BackendServer {
         message: `Route: ${req.originalUrl} not found.`
       });
     });
-    
+
     app.use((error: IErrorResponse, req: Request, res: Response, next: NextFunction) => {
       logger.error(error);
       if (error instanceof CustomError) {

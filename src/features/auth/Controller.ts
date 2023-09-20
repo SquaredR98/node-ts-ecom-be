@@ -16,6 +16,7 @@ import { userProfileService } from "../user-profile/Services";
 export class AuthController {
   // @joiValidation(signupSchema)
   public async signUpUser(req: Request, res: Response): Promise<void> {
+    throw new BadRequestError('Something went wrong');
     
     const { username, email, password, avatarColor, avatarImage, firstName, lastName } = req.body;
 
