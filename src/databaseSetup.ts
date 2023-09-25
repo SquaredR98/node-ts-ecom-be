@@ -7,7 +7,7 @@ const logger: Logger = config.createLogger('DATABASE-SETUP');
 export default () => {
   const connect = () => {
     mongoose
-      .connect(`${config.DATABASE_URI!}`, {})
+      .connect(`${config.DATABASE_URI!}/${config.NODE_ENV === 'development' ? 'dev-ecom-db' : 'prod-ecom-db'}`, {})
       .then(() => {
         logger.info('Connected to Database successfully :)');
       })

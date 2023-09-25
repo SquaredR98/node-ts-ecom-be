@@ -11,13 +11,13 @@ import { joiValidation } from "@utils/decorators/joi-validation.decorator";
 import { IUserDocument } from "@user-profile-db/Interfaces";
 import { config } from "@root/config";
 import { userProfileService } from "../user-profile/Services";
+import { permissionValidation } from "../../utils/decorators/permission-validation.decorator";
 
 
 export class AuthController {
   // @joiValidation(signupSchema)
+  @permissionValidation('CREATE_USER')
   public async signUpUser(req: Request, res: Response): Promise<void> {
-    throw new BadRequestError('Something went wrong');
-    
     const { username, email, password, avatarColor, avatarImage, firstName, lastName } = req.body;
 
     const userExists = await authService.checkIfUserExists(username, email);
@@ -46,8 +46,8 @@ export class AuthController {
 
   @joiValidation(loginSchema)
   public async signIn(req: Request, res: Response): Promise<void> {
-    const { usernameOrEmail, password } = req.body;
-    const existingUser: IAuthDocument = await authService.checkIfUserExists(usernameOrEmail, usernameOrEmail);
+    const { username, password } = req.body;
+    const existingUser: IAuthDocument = await authService.checkIfUserExists(username, username);
 
     if (!existingUser) {
       throw new BadRequestError('Invalid credentials');
@@ -87,8 +87,8 @@ export class AuthController {
     return {
       _id,
       uId,
-      username: username.toLowerCase(),
-      email: email.toLowerCase(),
+      username: username?.toLowerCase(),
+      email: email?.toLowerCase(),
       password,
       avatarColor,
     } as IAuthDocument;

@@ -12,6 +12,10 @@ export class AuthService {
   public async createUser(data: IAuthDocument): Promise<IAuthDocument> {
     return await this.authRepo.createUser(data);
   }
+
+  public async fetchPermissions(userId: string): Promise<String[]> {
+    return await this.authRepo.fetchPermissions(userId);
+  }
 }
 
 export const authService: AuthService = new AuthService(new AuthRepository());

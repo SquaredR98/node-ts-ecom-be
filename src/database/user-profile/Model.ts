@@ -19,8 +19,8 @@ const userSchema: Schema = new Schema(
       twitter: { type: String, default: '' },
       youtube: { type: String, default: '' }
     },
-    work: { type: String, default: '' },
-    school: { type: String, default: '' },
+    work: [{ type: String, default: '' }],
+    education: [{ type: String, default: '' }],
     location: { type: String, default: '' },
     bgImageVersion: { type: String, default: '' },
     bgImageId: { type: String, default: '' }

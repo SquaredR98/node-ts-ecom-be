@@ -9,7 +9,7 @@ import { config } from '../../config';
 
 export class AuthMiddleware {
 
-  public verifyUser(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public verifyUser(req: Request, res: Response, next: NextFunction): void {
     if(!req.session?.jwt) throw new NotAuthorizedError("Unauthorized. Try login again")
 
     try {
@@ -22,3 +22,5 @@ export class AuthMiddleware {
     next();
   }
 }
+
+export const authMiddleware: AuthMiddleware = new AuthMiddleware();

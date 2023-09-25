@@ -11,4 +11,10 @@ export class AuthRepository {
   public async createUser(data: IAuthDocument): Promise<IAuthDocument> {
     return await this.authModel.create(data);
   }
+
+  public async fetchPermissions(userId: string): Promise<String[]> {
+    const { apiPermissions } = await this.authModel.findOne({ _id: userId }).select('apiPermissions') as any;
+
+    return apiPermissions;
+  }
 }
