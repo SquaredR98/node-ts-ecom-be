@@ -3,7 +3,7 @@ import { IRoleDocument } from '@role-db/Interfaces';
 
 const roleSchema: Schema = new Schema(
   {
-    name: { type: String},
+    name: { type: String, uppercase: true },
     description: { type: String }
   },
   {

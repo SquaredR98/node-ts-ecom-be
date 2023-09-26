@@ -10,6 +10,8 @@ class Config {
   public SECRET_KEY_TWO: string | undefined;
   public CLIENT_URL: string | undefined;
   public NODE_ENV: string | undefined;
+  public SUPER_ADMIN_USER_NAME: string | undefined;
+  public SUPER_ADMIN_USER_EMAIL: string | undefined;
 
   private readonly DEFAULT_DB_URI = 'mongodb://192.168.3.84:27017/test';
 
@@ -20,6 +22,8 @@ class Config {
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
     this.CLIENT_URL = process.env.CLIENT_URL;
     this.NODE_ENV = process.env.NODE_ENV;
+    this.SUPER_ADMIN_USER_EMAIL = process.env.SUPER_ADMIN_USER_EMAIL;
+    this.SUPER_ADMIN_USER_NAME = process.env.SUPER_ADMIN_USER_NAME;
   }
 
   public createLogger(name: string): bunyan {

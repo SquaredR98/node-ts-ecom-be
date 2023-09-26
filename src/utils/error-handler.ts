@@ -43,6 +43,15 @@ export class BadRequestError extends CustomError {
   }
 }
 
+export class ConflictError extends CustomError {
+  statusCode = HTTP_STATUS.CONFLICT;
+  status = 'error';
+
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 export class JoiRequestValidationError extends CustomError {
   statusCode = HTTP_STATUS.BAD_REQUEST;
   status = 'error';

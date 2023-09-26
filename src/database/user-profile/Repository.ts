@@ -28,6 +28,10 @@ export class UserProfileRepository {
     return users[0];
   }
 
+  public async createUserProfile (data: IUserDocument): Promise<IUserDocument> {
+    return await this.model.create(data);
+  }
+
   private aggregateProject() {
     return {
       _id: 1,

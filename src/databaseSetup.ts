@@ -9,10 +9,10 @@ export default () => {
     mongoose
       .connect(`${config.DATABASE_URI!}/${config.NODE_ENV === 'development' ? 'dev-ecom-db' : 'prod-ecom-db'}`, {})
       .then(() => {
-        logger.info('Connected to Database successfully :)');
+        logger.info('DATABASE: Connected to Database successfully :)');
       })
       .catch((error) => {
-        logger.error('Error connecting to DB :(', error);
+        logger.error('DATABASE: Error connecting to DB :(', error);
         return process.exit(1);
       });
   };

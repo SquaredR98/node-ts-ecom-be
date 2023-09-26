@@ -7,6 +7,10 @@ export class UserProfileService {
   public async getUserByAuthId(userId: string): Promise<IUserDocument> {
     return await this.userProfileRepo.getUserByAuthId(userId);
   }
+
+  public async createUserProfile(data: IUserDocument): Promise<IUserDocument> {
+    return await this.userProfileRepo.createUserProfile(data);
+  }
 }
 
 export const userProfileService: UserProfileService = new UserProfileService(new UserProfileRepository());

@@ -87,9 +87,9 @@ export class BackendServer {
   }
 
   private startHttpServer(httpServer: HttpServer): void {
-    logger.info(`Server has started with process id ${process.pid}`);
+    logger.info(`SERVER: Server has started with process id ${process.pid}`);
     httpServer.listen(SERVER_PORT, () => {
-      logger.info('Server is listening on port:', SERVER_PORT);
+      logger.info('SERVER: Server is listening on port:', SERVER_PORT);
     });
   }
 }

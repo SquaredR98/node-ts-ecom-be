@@ -23,7 +23,19 @@ const signupSchema: ObjectSchema = Joi.object().keys({
   }),
   avatarImage: Joi.string().required().messages({
     'any.required': 'Avatar image is required'
-  })
+  }),
+  firstName: Joi.string().required().min(3).max(20).messages({
+    'string.base': 'First name must be of type string',
+    'string.min': 'First name must be greater than 3',
+    'string.max': 'Frist name should not be greater than 20 characters',
+    'string.empty': 'First name is required'
+  }),
+  lastName: Joi.string().required().min(3).max(20).messages({
+    'string.base': 'Last name must be of type string',
+    'string.min': 'Last name must be greater than 3',
+    'string.max': 'Last name should not be greater than 20 characters',
+    'string.empty': 'Last name is required'
+  }),
 });
 
 const loginSchema: ObjectSchema = Joi.object().keys({

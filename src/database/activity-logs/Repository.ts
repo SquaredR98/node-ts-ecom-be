@@ -1,7 +1,7 @@
 import { ActivityLogModel } from '@activity-logs-db/Model';
 import { IUserDocument } from '../user-profile/Interfaces';
 
-export class ActivityLog {
+export class ActivityLogRepository {
   private activityLogModel = ActivityLogModel;
 
   public async createActivityRecord(

@@ -4,16 +4,23 @@ import { AuthModel } from './Model';
 export class AuthRepository {
   private authModel = AuthModel;
 
-  public async findUserByEmailOrUsername(username: string, email: string): Promise<IAuthDocument> {
-    return (await this.authModel.findOne({ $or: [{ username }, { email }] })) as IAuthDocument;
+  public async findUserByEmailOrUsername(
+    username: string,
+    email: string
+  ): Promise<IAuthDocument> {
+    return (await this.authModel.findOne({
+      $or: [{ username }, { email }]
+    })) as IAuthDocument;
   }
 
   public async createUser(data: IAuthDocument): Promise<IAuthDocument> {
     return await this.authModel.create(data);
   }
 
-  public async fetchPermissions(userId: string): Promise<String[]> {
-    const { apiPermissions } = await this.authModel.findOne({ _id: userId }).select('apiPermissions') as any;
+  public async fetchPermissions(authId: string): Promise<String[]> {
+    const { apiPermissions } = (await this.authModel
+      .findOne({ _id: authId })
+      .select('apiPermissions')) as any;
 
     return apiPermissions;
   }

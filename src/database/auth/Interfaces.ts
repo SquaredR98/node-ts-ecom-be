@@ -17,6 +17,7 @@ export interface AuthPayload {
   username: string;
   avatarColor: string;
   iat?: number;
+  isSuperAdmin: boolean;
 }
 
 export interface IAuthDocument extends Document {
