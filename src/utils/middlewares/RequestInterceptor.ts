@@ -10,6 +10,7 @@ export class RequestInterceptor {
     res: Response,
     next: NextFunction
   ): Promise<void> {
+    const { currentUser } = req;
     logger.info('===================================================')
     logger.info('==============     NEW REQUEST    =================')
     logger.info('===================================================')

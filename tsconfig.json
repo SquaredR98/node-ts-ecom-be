@@ -115,6 +115,7 @@
       "@user-profile-db/*": ["src/database/user-profile/*"],
       "@auth-feature/*": ["src/features/auth/*"],
       "@role-feature/*": ["src/features/roles/*"],
+      "@permission-feature/*": ["src/features/permissions/*"],
       "@activity-logs-feature/*": ["src/features/activity-logs/*"],
       "@user-profile-feature/*": ["src/features/user-profile/*"],
       "@utils/*": ["src/utils/*"],

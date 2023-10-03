@@ -1,7 +1,8 @@
 import mongoose, { model, Model, Schema } from 'mongoose';
 import { IUserDocument } from '@user-profile-db/Interfaces';
-import { ObjectId } from 'mongodb';
+import { ObjectId, UUID } from 'mongodb';
 import { IActivityLogDocument } from './Interfaces';
+import { string } from 'joi';
 
 const activityLogSchema: Schema = new Schema(
   {
@@ -19,6 +20,35 @@ const activityLogSchema: Schema = new Schema(
     updatedData: {
       type: Object,
       default: {}
+    },
+    userAgent: {
+      type: String,
+      default: ''
+    },
+    host: {
+      type: String,
+      default: ''
+    },
+    requestId: {
+      type: UUID,
+      default: new UUID()
+    },
+    dataSent: {
+      type: Object,
+      default: {}
+    },
+    encoding: {
+      type: String,
+      default: ''
+    },
+    requestAction: {
+      status: {
+        type: String,
+        enum: ['ACCEPTED', 'REJECTED']
+      },
+      reason: {
+        type: String
+      }
     },
     activityBy: {
       _id: ObjectId,

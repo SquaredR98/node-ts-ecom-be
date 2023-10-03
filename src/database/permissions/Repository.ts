@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 import { PermissionModel } from '@permission-db/Model';
 import { IPermissionDocument } from '@permission-db/Interfaces';
 
-export class RolesRepository {
+export class PermissionsRepository {
   private permissionsModel = PermissionModel;
 
   public async fetchPermissions(

@@ -3,8 +3,9 @@ import { IPermissionDocument } from '@permission-db/Interfaces';
 
 const permissionSchema: Schema = new Schema(
   {
-    name: { type: String, uppercase: true },
-    description: { type: String }
+    name: { type: String },
+    description: { type: String },
+    role: { type: String }
   },
   {
     toJSON: {

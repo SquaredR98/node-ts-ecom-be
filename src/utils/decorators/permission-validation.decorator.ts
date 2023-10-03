@@ -19,7 +19,6 @@ export function permissionValidation(permission: string): IPermissionDecorator {
     descriptor.value = async function (...args: any[]) {
       const req: Request = args[0];
       const { currentUser, body } = req;
-      console.log(currentUser);
       const allowedPermissions = !currentUser?.isSuperAdmin
         ? await authService.fetchPermissions(`${currentUser?.userId}`)
         : [];
