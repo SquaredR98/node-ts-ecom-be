@@ -3,11 +3,13 @@ import HTTP_STATUS from 'http-status-codes';
 
 import { roleServices } from '@role-feature/Services';
 import { rolesSchema } from '@role-feature/joiSchema';
-import { BadRequestError, ConflictError } from '@utils/error-handler';
+import { ConflictError } from '@utils/error-handler';
 import { joiValidation } from '@utils/decorators/joi-validation.decorator';
+import { permissionValidation } from '../../utils/decorators/permission-validation.decorator';
 
 export class RolesController {
   @joiValidation(rolesSchema)
+  @permissionValidation('CREATE_ROLE')
   public async createRole(req: Request, res: Response): Promise<void> {
     const roleData = req.body;
     const roleExists = await roleServices.fetchRole(roleData.name);
@@ -22,6 +24,7 @@ export class RolesController {
       .json({ message: 'Role created successfully' });
   }
 
+  @permissionValidation('GET_ROLES')
   public async fetchRole(req: Request, res: Response): Promise<void> {
     const idOrName = req.query.idOrName;
 

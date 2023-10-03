@@ -3,10 +3,13 @@ import cors from 'cors';
 import helmet from 'helmet';
 import Logger from 'bunyan';
 import 'express-async-errors';
+import { createClient } from 'redis';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
 import { Server as HttpServer } from 'http';
 import HTTP_STATUSES from 'http-status-codes';
+import { Server as SocketIoServer } from 'socket.io';
+import { createAdapter } from '@socket.io/redis-adapter';
 import { Application, NextFunction, Request, Response, json, urlencoded } from 'express';
 
 import { config } from '@root/config';
@@ -77,10 +80,12 @@ export class BackendServer {
     });
   }
 
-  private startServer(app: Application): void {
+  private async startServer(app: Application): Promise<void> {
     try {
       const httpServer: HttpServer = new HttpServer(app);
+      const socketIo: SocketIoServer = await this.createSocketIO(httpServer);
       this.startHttpServer(httpServer);
+      this.sockeIOConnection(socketIo);
     } catch (error) {
       console.log(error);
     }
@@ -91,5 +96,25 @@ export class BackendServer {
     httpServer.listen(SERVER_PORT, () => {
       logger.info('SERVER: Server is listening on port:', SERVER_PORT);
     });
+  }
+
+  private async createSocketIO(httpServer: HttpServer): Promise<SocketIoServer> {
+    const io: SocketIoServer = new SocketIoServer(httpServer, {
+      cors: {
+        origin: config.CLIENT_URL,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+      }
+    });
+
+    const pubClient = createClient({ url: config.REDIS_HOST });
+    const subClient = pubClient.duplicate();
+
+    await Promise.all([pubClient.connect(), subClient.connect()]);
+
+    return io.adapter(createAdapter(pubClient, subClient));
+  }
+
+  private sockeIOConnection(io: SocketIoServer): void {
+    io;
   }
 }

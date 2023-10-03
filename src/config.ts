@@ -12,6 +12,7 @@ class Config {
   public NODE_ENV: string | undefined;
   public SUPER_ADMIN_USER_NAME: string | undefined;
   public SUPER_ADMIN_USER_EMAIL: string | undefined;
+  public REDIS_HOST: string | undefined;
 
   private readonly DEFAULT_DB_URI = 'mongodb://192.168.3.84:27017/test';
 
@@ -24,6 +25,7 @@ class Config {
     this.NODE_ENV = process.env.NODE_ENV;
     this.SUPER_ADMIN_USER_EMAIL = process.env.SUPER_ADMIN_USER_EMAIL;
     this.SUPER_ADMIN_USER_NAME = process.env.SUPER_ADMIN_USER_NAME;
+    this.REDIS_HOST = process.env.REDIS_HOST || 'redis://localhost:6379';
   }
 
   public createLogger(name: string): bunyan {

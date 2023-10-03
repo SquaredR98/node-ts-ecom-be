@@ -107,8 +107,10 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "pretty": true,
     "paths": {
+      "@redis/*": ["src/redis/*"],
       "@auth-db/*": ["src/database/auth/*"],
       "@role-db/*": ["src/database/roles/*"],
+      "@permission-db/*": ["src/database/permissions/*"],
       "@activity-logs-db/*": ["src/database/activity-logs/*"],
       "@user-profile-db/*": ["src/database/user-profile/*"],
       "@auth-feature/*": ["src/features/auth/*"],
